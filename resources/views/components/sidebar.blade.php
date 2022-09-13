@@ -14,7 +14,7 @@
             overflow-hidden
             transition-all
             transform
-            bg-white
+            bg-[#171f29]
             border-r
             shadow-lg
             lg:z-auto lg:static lg:shadow-none
@@ -22,7 +22,7 @@
       :class="{ '-translate-x-full lg:translate-x-0 lg:w-20': !isSidebarOpen }">
       <!-- sidebar header -->
       <div class="flex items-center justify-between flex-shrink-0 p-2" :class="{ 'lg:justify-center': !isSidebarOpen }">
-          <span class="p-2 text-xl font-semibold leading-8 tracking-wider uppercase whitespace-nowrap">
+          <span class="white p-2 text-xl font-semibold leading-8 tracking-wider uppercase whitespace-nowrap">
               K<span :class="{ 'lg:hidden': !isSidebarOpen }">-WD</span>
           </span>
           <button @click="toggleSidbarMenu()" class="p-2 rounded-md lg:hidden">

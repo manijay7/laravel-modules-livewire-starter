@@ -1,78 +1,30 @@
 <x-app-layout>
 
     <x-title-stack title="Welcome">
+        <x-slot name="breadcrumbs">
+            <x-bread-crumbs items="Home,Dashboard" />
+        </x-slot>
+        <x-slot name="right">
+            <x-button danger label="Primary" />
+        </x-slot>
 
     </x-title-stack>
 
+
+
     <!-- Chart cards (Four columns grid) -->
     <div class="grid grid-cols-1 gap-6 mt-6 md:grid-cols-2 lg:grid-cols-4">
-        <!-- Users chart card --><a href="#"
-            class="p-4 transition-shadow border rounded-lg shadow-sm hover:shadow-lg">
-            <div class="flex items-start">
-                <div class="flex flex-col flex-shrink-0 space-y-2">
-                    <span class="text-gray-400">Total Users</span>
-                    <span class="text-lg font-semibold">100,221</span>
-                </div>
-                <div class="relative min-w-0 ml-auto h-14">
-                    <canvas id="usersChart"></canvas>
-                </div>
+        <x-info-box label="Total Users" subLabel="25000">
+            <div class="relative min-w-0 ml-auto h-14">
+                <canvas id="usersChart"></canvas>
             </div>
-            <div>
-                <span class="inline-block px-2 text-sm text-white bg-green-300 rounded">14%</span>
-                <span>from 2020</span>
-            </div>
-        </a>
-
-        <!-- Sessions chart card --><a href="#"
-            class="p-4 transition-shadow border rounded-lg shadow-sm hover:shadow-lg">
-            <div class="flex items-start">
-                <div class="flex flex-col flex-shrink-0 space-y-2">
-                    <span class="text-gray-400">Sessions</span>
-                    <span class="text-lg font-semibold">40%</span>
+            <x-slot:footer>
+                <div>
+                    <span class="inline-block px-2 text-sm text-white bg-green-300 rounded">14%</span>
+                    <span>from 2020</span>
                 </div>
-                <div class="relative min-w-0 ml-auto h-14">
-                    <canvas id="sessionsChart"></canvas>
-                </div>
-            </div>
-            <div>
-                <span class="inline-block px-2 text-sm text-white bg-green-300 rounded">1.2%</span>
-                <span>from 2020</span>
-            </div>
-        </a>
-
-        <!-- Vists chart card --><a href="#"
-            class="p-4 transition-shadow border rounded-lg shadow-sm hover:shadow-lg">
-            <div class="flex items-start">
-                <div class="flex flex-col flex-shrink-0 space-y-2">
-                    <span class="text-gray-400">Vists</span>
-                    <span class="text-lg font-semibold">300,527</span>
-                </div>
-                <div class="relative min-w-0 ml-auto h-14">
-                    <canvas id="vistsChart"></canvas>
-                </div>
-            </div>
-            <div>
-                <span class="inline-block px-2 text-sm text-white bg-green-300 rounded">10%</span>
-                <span>from 2020</span>
-            </div>
-        </a>
-
-        <!-- Articles chart card --><a href="#"
-            class="p-4 transition-shadow border rounded-lg shadow-sm hover:shadow-lg">
-            <div class="flex items-start">
-                <div class="flex flex-col flex-shrink-0 space-y-2">
-                    <span class="text-gray-400">Articles</span>
-                    <span class="text-lg font-semibold">600,429</span>
-                </div>
-                <div class="relative min-w-0 ml-auto h-14">
-                    <canvas id="articlesChart"></canvas>
-                </div>
-            </div>
-            <div>
-                <span class="inline-block px-2 text-sm text-white bg-green-300 rounded">30%</span>
-                <span>from 2020</span>
-            </div>
-        </a>
+            </x-slot:footer>
+        </x-info-box>
     </div>
 
     <!-- Two columns grid -->
