@@ -4,7 +4,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class infoBox--view extends Component
+class sub-nav-link extends Component
 {
     /**
      * Create a new component instance.
@@ -23,6 +23,6 @@ class infoBox--view extends Component
      */
     public function render()
     {
-        return view('components.info-box--view');
+        return view('components.sub-nav-link');
     }
 }

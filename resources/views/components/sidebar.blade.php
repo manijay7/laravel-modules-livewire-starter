@@ -1,83 +1,93 @@
   <!-- Sidebar -->
-  <aside x-transition:enter="transition transform duration-300"
-      x-transition:enter-start="-translate-x-full opacity-30  ease-in"
-      x-transition:enter-end="translate-x-0 opacity-100 ease-out" x-transition:leave="transition transform duration-300"
-      x-transition:leave-start="translate-x-0 opacity-100 ease-out"
-      x-transition:leave-end="-translate-x-full opacity-0 ease-in"
-      class="
-            fixed
-            inset-y-0
-            z-10
-            flex flex-col flex-shrink-0
-            w-64
-            max-h-screen
-            overflow-hidden
-            transition-all
-            transform
-            bg-[#171f29]
-            border-r
-            shadow-lg
-            lg:z-auto lg:static lg:shadow-none
-            "
-      :class="{ '-translate-x-full lg:translate-x-0 lg:w-20': !isSidebarOpen }">
-      <!-- sidebar header -->
-      <div class="flex items-center justify-between flex-shrink-0 p-2" :class="{ 'lg:justify-center': !isSidebarOpen }">
-          <span class="white p-2 text-xl font-semibold leading-8 tracking-wider uppercase whitespace-nowrap">
-              K<span :class="{ 'lg:hidden': !isSidebarOpen }">-WD</span>
-          </span>
-          <button @click="toggleSidbarMenu()" class="p-2 rounded-md lg:hidden">
-              <svg class="w-6 h-6 text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                  stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-          </button>
-      </div>
-      <!-- Sidebar links -->
-      <nav class="flex-1 overflow-hidden hover:overflow-y-auto">
-          <ul class="p-2 overflow-hidden">
-              <li>
-                  <a href="#" class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100"
-                      :class="{ 'justify-center': !isSidebarOpen }">
-                      <span>
-                          <svg class="w-6 h-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none"
-                              viewBox="0 0 24 24" stroke="currentColor">
-                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                          </svg>
-                      </span>
-                      <span :class="{ 'lg:hidden': !isSidebarOpen }">Dashboard</span>
+  <aside class="min-h-screen bg-gray-50 dark:bg-gray-800" :class="{ 'dark': isDark }">
+
+      <div class="sidebar
+      min-h-screen w-[3.35rem] overflow-hidden border-r hover:w-56 hover:shadow-lg"
+          :class="{ 'w-56': isSidebarOpen }">
+          <div class="flex h-screen flex-col justify-between pt-2 pb-6">
+              <div>
+                  <div class="w-max p-2.5">
+                      {{-- <img src="https://tailus.io/images/logo.svg" class="w-32" alt=""> --}}
+                      <svg id="logo-54" width="170" height="41" viewBox="0 0 170 41" fill="none"
+                          xmlns="http://www.w3.org/2000/svg">
+                          <path d="M51.8601 28.138H63.8121V24.538H56.1081V10.978H51.8601V28.138Z" class="cneutral"
+                              fill="#340E0E"></path>
+                          <path
+                              d="M70.8932 25.738C69.1892 25.738 68.3012 24.25 68.3012 22.018C68.3012 19.786 69.1892 18.274 70.8932 18.274C72.5972 18.274 73.5092 19.786 73.5092 22.018C73.5092 24.25 72.5972 25.738 70.8932 25.738ZM70.9172 28.522C74.8772 28.522 77.4692 25.714 77.4692 22.018C77.4692 18.322 74.8772 15.514 70.9172 15.514C66.9812 15.514 64.3412 18.322 64.3412 22.018C64.3412 25.714 66.9812 28.522 70.9172 28.522Z"
+                              class="cneutral" fill="#340E0E"></path>
+                          <path
+                              d="M84.3237 32.386C86.1477 32.386 87.7557 31.978 88.8357 31.018C89.8197 30.13 90.4677 28.786 90.4677 26.938V15.85H86.7237V17.17H86.6757C85.9557 16.138 84.8517 15.49 83.2197 15.49C80.1717 15.49 78.0597 18.034 78.0597 21.634C78.0597 25.402 80.6277 27.466 83.3877 27.466C84.8757 27.466 85.8117 26.866 86.5317 26.05H86.6277V27.274C86.6277 28.762 85.9317 29.626 84.2757 29.626C82.9797 29.626 82.3317 29.074 82.1157 28.426H78.3237C78.7077 30.994 80.9397 32.386 84.3237 32.386ZM84.2997 24.562C82.8357 24.562 81.8757 23.362 81.8757 21.514C81.8757 19.642 82.8357 18.442 84.2997 18.442C85.9317 18.442 86.7957 19.834 86.7957 21.49C86.7957 23.218 86.0037 24.562 84.2997 24.562Z"
+                              class="cneutral" fill="#340E0E"></path>
+                          <path
+                              d="M98.166 25.738C96.462 25.738 95.574 24.25 95.574 22.018C95.574 19.786 96.462 18.274 98.166 18.274C99.87 18.274 100.782 19.786 100.782 22.018C100.782 24.25 99.87 25.738 98.166 25.738ZM98.19 28.522C102.15 28.522 104.742 25.714 104.742 22.018C104.742 18.322 102.15 15.514 98.19 15.514C94.254 15.514 91.614 18.322 91.614 22.018C91.614 25.714 94.254 28.522 98.19 28.522Z"
+                              class="cneutral" fill="#340E0E"></path>
+                          <path
+                              d="M105.884 28.138H109.796V15.85H105.884V28.138ZM105.884 14.146H109.796V10.978H105.884V14.146Z"
+                              class="cneutral" fill="#340E0E"></path>
+                          <path
+                              d="M111.494 32.194H115.406V26.866H115.454C116.222 27.898 117.35 28.522 118.934 28.522C122.15 28.522 124.286 25.978 124.286 21.994C124.286 18.298 122.294 15.49 119.03 15.49C117.35 15.49 116.15 16.234 115.31 17.338H115.238V15.85H111.494V32.194ZM117.926 25.498C116.246 25.498 115.286 24.13 115.286 22.138C115.286 20.146 116.15 18.634 117.854 18.634C119.534 18.634 120.326 20.026 120.326 22.138C120.326 24.226 119.414 25.498 117.926 25.498Z"
+                              class="cneutral" fill="#340E0E"></path>
+                          <path
+                              d="M130.655 28.522C133.871 28.522 136.247 27.13 136.247 24.442C136.247 21.298 133.703 20.746 131.543 20.386C129.983 20.098 128.591 19.978 128.591 19.114C128.591 18.346 129.335 17.986 130.295 17.986C131.375 17.986 132.119 18.322 132.263 19.426H135.863C135.671 17.002 133.799 15.49 130.319 15.49C127.415 15.49 125.015 16.834 125.015 19.426C125.015 22.306 127.295 22.882 129.431 23.242C131.063 23.53 132.551 23.65 132.551 24.754C132.551 25.546 131.807 25.978 130.631 25.978C129.335 25.978 128.519 25.378 128.375 24.154H124.679C124.799 26.866 127.055 28.522 130.655 28.522Z"
+                              class="cneutral" fill="#340E0E"></path>
+                          <path
+                              d="M141.561 28.498C143.265 28.498 144.345 27.826 145.233 26.626H145.305V28.138H149.049V15.85H145.137V22.714C145.137 24.178 144.321 25.186 142.977 25.186C141.729 25.186 141.129 24.442 141.129 23.098V15.85H137.241V23.914C137.241 26.65 138.729 28.498 141.561 28.498Z"
+                              class="cneutral" fill="#340E0E"></path>
+                          <path
+                              d="M150.75 28.138H154.662V21.25C154.662 19.786 155.382 18.754 156.606 18.754C157.782 18.754 158.334 19.522 158.334 20.842V28.138H162.246V21.25C162.246 19.786 162.942 18.754 164.19 18.754C165.366 18.754 165.918 19.522 165.918 20.842V28.138H169.83V20.146C169.83 17.386 168.438 15.49 165.654 15.49C164.07 15.49 162.75 16.162 161.79 17.65H161.742C161.118 16.33 159.894 15.49 158.286 15.49C156.51 15.49 155.334 16.33 154.566 17.602H154.494V15.85H150.75V28.138Z"
+                              class="cneutral" fill="#340E0E"></path>
+                          <path fill-rule="evenodd" clip-rule="evenodd"
+                              d="M20.6841 40.138C31.7298 40.138 40.6841 31.1837 40.6841 20.138C40.6841 9.09234 31.7298 0.138031 20.6841 0.138031C9.63837 0.138031 0.684082 9.09234 0.684082 20.138C0.684082 31.1837 9.63837 40.138 20.6841 40.138ZM26.9234 9.45487C27.2271 8.37608 26.1802 7.73816 25.2241 8.41933L11.8772 17.9276C10.8403 18.6663 11.0034 20.138 12.1222 20.138L15.6368 20.138V20.1108H22.4866L16.9053 22.0801L14.4448 30.8212C14.1411 31.9 15.1879 32.5379 16.1441 31.8567L29.491 22.3485C30.5279 21.6098 30.3647 20.138 29.246 20.138L23.9162 20.138L26.9234 9.45487Z"
+                              class="ccustom" fill="#F15757"></path>
+                      </svg>
+                  </div>
+                  <ul class="mt-6 space-y-2 tracking-wide">
+                      <li class="min-w-max">
+                          <x-nav-link label="Dashboard" :href="route('dashboard')" :active="request()->routeIs('dashboard')" aria-label="dashboard">
+                          </x-nav-link>
+                      </li>
+
+                      <li class="min-w-max" x-data="{ open: false }">
+                          <a href="#" @click="$event.preventDefault(); open = !open" aria-label="dashboard"
+                              class=" relative flex items-center space-x-4  px-4 py-3 text-base  text-gray-900  dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+                              :class="{ ' hover:bg-gray-100 dark:hover:bg-gray-700': open }" role="button"
+                              aria-haspopup="true" :aria-expanded="(open) ? 'true' : 'false'">
+                              <ion-icon name="apps-outline" class="w-5 h-5"></ion-icon>
+                              <span class="-mr-1 text-sm font-medium">CRM</span>
+                              <span aria-hidden="true" class="ml-auto">
+                                  <ion-icon name="chevron-down-outline" class="w-4 h-4 transition-transform transform"
+                                      :class="{ 'rotate-180': open }"></ion-icon>
+                              </span>
+                          </a>
+                          <ul x-show="open" class="mt-2 space-y-2 px-7" role="menu" aria-label="Authentication">
+                              <li class="min-w-max">
+                                  <x-sub-nav-link label="Leads"></x-sub-nav-link>
+                              </li>
+                              <li class="min-w-max">
+                                  <x-sub-nav-link label="Leads"></x-sub-nav-link>
+                              </li>
+                              <li class="min-w-max">
+                                  <x-sub-nav-link label="Leads"></x-sub-nav-link>
+                              </li>
+
+                          </ul>
+                      </li>
+
+                  </ul>
+              </div>
+
+              <div class="w-max -mb-3">
+                  <a href="#" class="group flex items-center space-x-4 rounded-md px-4 py-3 text-gray-600">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:fill-cyan-600"
+                          viewBox="0 0 20 20" fill="currentColor">
+                          <path fill-rule="evenodd"
+                              d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
+                              clip-rule="evenodd" />
+                      </svg>
+                      <span class="group-hover:text-gray-700">Settings</span>
                   </a>
-              </li>
-              <!-- Sidebar Links... -->
-          </ul>
-      </nav>
-      <!-- Sidebar footer -->
-      <div class="flex-shrink-0 p-2 border-t max-h-14">
-          <button
-              class="
-                flex
-                items-center
-                justify-center
-                w-full
-                px-4
-                py-2
-                space-x-1
-                font-medium
-                tracking-wider
-                uppercase
-                bg-gray-100
-                border
-                rounded-md
-                focus:outline-none focus:ring
-                ">
-              <span>
-                  <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                      stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                  </svg>
-              </span>
-              <span :class="{ 'lg:hidden': !isSidebarOpen }"> Logout </span>
-          </button>
+              </div>
+
+          </div>
       </div>
   </aside>
